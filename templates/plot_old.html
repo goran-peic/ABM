@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Simulator</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/static/css/bootstrap.css" rel="stylesheet">
+    <!-- Bootstrap theme -->
+    <link href="/static/css/bootstrap-theme.min.css" rel="stylesheet">
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="/static/css/ie10_workaround.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="/static/css/theme.css" rel="stylesheet">
+
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <link rel="stylesheet" href="/static/css/bokeh-0.12.1.min.css" type="text/css" />
+
+    <script type="text/javascript" src="/static/js/bokeh-0.12.1.min.js"></script>
+    <script type="text/javascript">Bokeh.set_log_level("info");</script>
+
+  </head>
+
+  <div>
+
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container" align="center">
+        <div class="row">
+            <div class="col-md-12">
+                <a class="navbar-brand">Agent-Based Simulation</a>
+            </div>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container theme-showcase" align="justify">
+      <h2>About the Game</h2>
+      <p> This web application runs an agent-based simulation and plots the evolution of the initial population over time.</p>
+    </div> <!-- Introduction -->
+
+
+    <div class="row">
+      <div class="container">
+        <div class="col-md-4" id="wrapper">
+
+    <div class="container theme-showcase" role="main">
+      <div align="center" style="height:20px"></div>
+      <div class="container">
+        <form method="post">
+          <div class="form-group row">
+            <label for="size" class="col-sm-2 col-form-label">Board Size</label>
+            <div class="col-sm-1">
+              <input type="number" class="form-control" name="terrain_size" id="size" placeholder="#">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="grass" class="col-sm-2 col-form-label">Number of Grass</label>
+            <div class="col-sm-1">
+              <input type="number" class="form-control" name="grass" id="grass" placeholder="#">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="sheep" class="col-sm-2 col-form-label">Number of Sheep</label>
+            <div class="col-sm-1">
+              <input type="number" class="form-control" id="sheep" name="sheep" placeholder="#">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="wolves" class="col-sm-2 col-form-label">Number of Wolves</label>
+            <div class="col-sm-1">
+              <input type="number" class="form-control" id="wolves" name="wolves" placeholder="#">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="runs" class="col-sm-2 col-form-label">Number of Iterations</label>
+            <div class="col-sm-1">
+              <input type="number" class="form-control" name="simulation_runs" id="runs" placeholder="#">
+            </div>
+          </div>
+          <fieldset class="form-group row">
+            <label for="runs" class="col-sm-2 col-form-label">Select Y-Axis</label>
+            <div class="col-sm-1">
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input class="form-check-input" type="radio" name="radios" id="count_radio" value="counts" checked>
+                  Counts
+                </label>
+              </div>
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input class="form-check-input" type="radio" name="radios" id="share_radio" value="shares">
+                  Shares
+                </label>
+              </div>
+            </div>
+          </fieldset>
+          <div class="form-group row">
+          <div class="col-sm-2">
+          <div align="justify">
+              <button class="btn btn-danger" type="submit" value="send" name="action">RUN SIMULATION</button>
+          </div>
+          </div>
+      </div>
+        </form>
+      </div>
+    </div>
+  </div>
+    <div class="col-md-8"><div class="bk-root">
+  <div class="plotdiv" id="{{ element_id }}"></div>
+</div>
+      </div>
+</div>
+
+<!--
+<div class="col-md-8"><div class="bk-root">
+  <div class="plotdiv" id="{{ element_id }}"></div>
+</div></div>
+-->
+
+<script type="text/javascript"> {{ js_script|safe }} </script>
+
+
+<!--
+
+<script type="text/javascript">
+            Bokeh.$(function() {
+            var docs_json = {"be2fa3ca-59d0-48ee-8154-fa2cec1d8882":{"roots":{"references":[{"attributes":{"line_alpha":{"value":0.1},"line_color":{"value":"#1f77b4"},"x":{"field":"x"},"y":{"field":"y"}},"id":"348e2fe8-4e00-4373-97a9-8f7117865181","type":"Line"},{"attributes":{"fill_color":{"value":"red"},"line_color":{"value":"red"},"x":{"field":"x"},"y":{"field":"y"}},"id":"19d62661-5d0e-4ec5-a72f-9c4801ea0e3d","type":"Triangle"},{"attributes":{"bottom_units":"screen","fill_alpha":{"value":0.5},"fill_color":{"value":"lightgrey"},"left_units":"screen","level":"overlay","line_alpha":{"value":1.0},"line_color":{"value":"black"},"line_dash":[4,4],"line_width":{"value":2},"plot":null,"render_mode":"css","right_units":"screen","top_units":"screen"},"id":"d2e1660c-3119-478f-b736-810003c5e4c9","type":"BoxAnnotation"},{"attributes":{},"id":"ec7f7bfa-3518-414f-86a6-6312380dee7d","type":"BasicTickFormatter"},{"attributes":{"fill_color":{"value":"#1f77b4"},"line_color":{"value":"#1f77b4"},"x":{"field":"x"},"y":{"field":"y"}},"id":"30db2a6d-e320-4ad1-946f-a9dfcb158231","type":"Circle"},{"attributes":{"data_source":{"id":"37a74bf7-c872-44ae-bbdb-97d173b7926b","type":"ColumnDataSource"},"glyph":{"id":"58d466f1-2a9d-4ac9-b73e-7435b2b3611c","type":"Line"},"hover_glyph":null,"nonselection_glyph":{"id":"348e2fe8-4e00-4373-97a9-8f7117865181","type":"Line"},"selection_glyph":null},"id":"872af291-c143-49a4-9f17-a53529d1d107","type":"GlyphRenderer"},{"attributes":{"callback":null,"column_names":["y","x"],"data":{"x":[1.0,2.0,3.0,4.0,5.0,6.0,7.0,8.0,9.0,10.0,11.0,12.0,13.0,14.0,15.0,16.0,17.0,18.0,19.0,20.0,21.0,22.0,23.0,24.0,25.0,26.0,27.0,28.0,29.0,30.0,31.0,32.0,33.0,34.0,35.0,36.0,37.0,38.0,39.0,40.0,41.0,42.0,43.0,44.0,45.0,46.0,47.0,48.0,49.0,50.0,51.0,52.0,53.0,54.0,55.0,56.0,57.0,58.0,59.0,60.0,61.0,62.0,63.0,64.0,65.0,66.0,67.0,68.0,69.0,70.0,71.0,72.0,73.0,74.0,75.0,76.0,77.0,78.0,79.0,80.0,81.0,82.0,83.0,84.0,85.0,86.0,87.0,88.0,89.0,90.0,91.0,92.0,93.0,94.0,95.0,96.0,97.0,98.0,99.0,100.0],"y":[40.0,34.0,50.0,48.0,41.0,36.0,43.0,36.0,39.0,47.0,11.0,16.0,23.0,11.0,12.0,12.0,13.0,11.0,16.0,12.0,17.0,11.0,18.0,7.0,10.0,16.0,14.0,18.0,18.0,14.0,15.0,23.0,11.0,9.0,17.0,16.0,14.0,19.0,12.0,15.0,15.0,18.0,16.0,12.0,16.0,16.0,16.0,12.0,14.0,16.0,12.0,11.0,12.0,13.0,14.0,13.0,14.0,17.0,13.0,11.0,15.0,16.0,15.0,13.0,13.0,12.0,16.0,12.0,16.0,17.0,11.0,11.0,19.0,10.0,12.0,11.0,12.0,17.0,18.0,14.0,12.0,10.0,11.0,15.0,12.0,15.0,9.0,12.0,10.0,9.0,12.0,12.0,17.0,15.0,12.0,13.0,11.0,12.0,13.0,15.0]}},"id":"a23d26bc-6815-4659-ba5b-d6e1deedb918","type":"ColumnDataSource"},{"attributes":{"plot":{"id":"074c5a27-7e35-47ce-aa3d-38db3878273f","subtype":"Figure","type":"Plot"}},"id":"26b489e2-f0ee-4088-9865-67a47cbf6569","type":"ResetTool"},{"attributes":{"formatter":{"id":"ec7f7bfa-3518-414f-86a6-6312380dee7d","type":"BasicTickFormatter"},"plot":{"id":"074c5a27-7e35-47ce-aa3d-38db3878273f","subtype":"Figure","type":"Plot"},"ticker":{"id":"8b6c6159-8300-4605-b19a-eace6d82e34a","type":"BasicTicker"}},"id":"1187da5e-5c24-416b-bdc7-bc750ecbb55a","type":"LinearAxis"},{"attributes":{"data_source":{"id":"a23d26bc-6815-4659-ba5b-d6e1deedb918","type":"ColumnDataSource"},"glyph":{"id":"e5760784-8f68-4002-9595-0f3c9e266bf3","type":"Line"},"hover_glyph":null,"nonselection_glyph":{"id":"3d9cf1dc-2c26-4096-b211-8b7cc3b1708e","type":"Line"},"selection_glyph":null},"id":"e6c4dd61-9229-43eb-899e-caf248466ded","type":"GlyphRenderer"},{"attributes":{"plot":null,"text":"Evolution of Your Population"},"id":"c866bf27-e479-484b-a1dd-fbe660372cf1","type":"Title"},{"attributes":{},"id":"8228a45c-fd65-4a90-b926-b9d42cdcc8e6","type":"ToolEvents"},{"attributes":{"fill_color":{"value":"blue"},"line_color":{"value":"#1f77b4"},"x":{"field":"x"},"y":{"field":"y"}},"id":"7e518775-7725-4ee4-b9bc-a80f0a1e75c0","type":"Square"},{"attributes":{"callback":null,"column_names":["y","x"],"data":{"x":[1.0,2.0,3.0,4.0,5.0,6.0,7.0,8.0,9.0,10.0,11.0,12.0,13.0,14.0,15.0,16.0,17.0,18.0,19.0,20.0,21.0,22.0,23.0,24.0,25.0,26.0,27.0,28.0,29.0,30.0,31.0,32.0,33.0,34.0,35.0,36.0,37.0,38.0,39.0,40.0,41.0,42.0,43.0,44.0,45.0,46.0,47.0,48.0,49.0,50.0,51.0,52.0,53.0,54.0,55.0,56.0,57.0,58.0,59.0,60.0,61.0,62.0,63.0,64.0,65.0,66.0,67.0,68.0,69.0,70.0,71.0,72.0,73.0,74.0,75.0,76.0,77.0,78.0,79.0,80.0,81.0,82.0,83.0,84.0,85.0,86.0,87.0,88.0,89.0,90.0,91.0,92.0,93.0,94.0,95.0,96.0,97.0,98.0,99.0,100.0],"y":[35.0,33.0,34.0,36.0,34.0,31.0,34.0,34.0,33.0,37.0,40.0,31.0,33.0,31.0,36.0,34.0,34.0,37.0,30.0,28.0,27.0,22.0,21.0,21.0,16.0,16.0,17.0,22.0,21.0,15.0,15.0,13.0,4.0,10.0,13.0,6.0,9.0,6.0,8.0,7.0,10.0,10.0,12.0,8.0,7.0,7.0,8.0,8.0,8.0,10.0,9.0,10.0,7.0,11.0,6.0,6.0,8.0,4.0,3.0,12.0,7.0,6.0,4.0,2.0,4.0,5.0,7.0,6.0,4.0,9.0,7.0,7.0,6.0,9.0,4.0,3.0,9.0,15.0,6.0,9.0,9.0,9.0,7.0,7.0,8.0,5.0,6.0,5.0,7.0,6.0,3.0,7.0,5.0,7.0,5.0,8.0,5.0,4.0,3.0,8.0]}},"id":"062c8dfa-5c44-4596-aa72-23b7faee87a2","type":"ColumnDataSource"},{"attributes":{},"id":"8b6c6159-8300-4605-b19a-eace6d82e34a","type":"BasicTicker"},{"attributes":{"line_alpha":{"value":0.1},"line_color":{"value":"#1f77b4"},"line_dash":[4,4],"line_width":{"value":2},"x":{"field":"x"},"y":{"field":"y"}},"id":"1d737284-ee17-4143-a98f-c9ff06baaae7","type":"Line"},{"attributes":{"plot":{"id":"074c5a27-7e35-47ce-aa3d-38db3878273f","subtype":"Figure","type":"Plot"}},"id":"2f0a460f-4835-4b0b-b9ec-95fcb67e4787","type":"SaveTool"},{"attributes":{"below":[{"id":"1187da5e-5c24-416b-bdc7-bc750ecbb55a","type":"LinearAxis"}],"left":[{"id":"98ff32d4-be6e-451a-b504-04a6eced6196","type":"LinearAxis"}],"renderers":[{"id":"1187da5e-5c24-416b-bdc7-bc750ecbb55a","type":"LinearAxis"},{"id":"5f416863-0827-4869-bcc8-cbcd89a4e18b","type":"Grid"},{"id":"98ff32d4-be6e-451a-b504-04a6eced6196","type":"LinearAxis"},{"id":"e4c28b23-e737-4443-ae61-54f507ba8977","type":"Grid"},{"id":"d2e1660c-3119-478f-b736-810003c5e4c9","type":"BoxAnnotation"},{"id":"3950878a-e642-404c-9007-0e08534b853b","type":"Legend"},{"id":"c1cf64af-a7fe-4299-beee-277e8b5f7b10","type":"GlyphRenderer"},{"id":"e6c4dd61-9229-43eb-899e-caf248466ded","type":"GlyphRenderer"},{"id":"250440ad-2ffd-47bc-a81e-024a9d6c3e07","type":"GlyphRenderer"},{"id":"c558c765-6179-41e1-9dfd-dc44a95c911b","type":"GlyphRenderer"},{"id":"e787a2a1-10c6-48dc-8fa4-7d05446fe408","type":"GlyphRenderer"},{"id":"872af291-c143-49a4-9f17-a53529d1d107","type":"GlyphRenderer"}],"title":{"id":"c866bf27-e479-484b-a1dd-fbe660372cf1","type":"Title"},"tool_events":{"id":"8228a45c-fd65-4a90-b926-b9d42cdcc8e6","type":"ToolEvents"},"toolbar":{"id":"95c5d51d-02ab-44b1-b9e6-98cca79deb01","type":"Toolbar"},"x_range":{"id":"56c37064-459c-4050-bed9-f084a33fe092","type":"DataRange1d"},"y_range":{"id":"af3efc73-84a6-4bab-bc6a-2bc8eb5b70fe","type":"DataRange1d"}},"id":"074c5a27-7e35-47ce-aa3d-38db3878273f","subtype":"Figure","type":"Plot"},{"attributes":{"active_drag":"auto","active_scroll":"auto","active_tap":"auto","tools":[{"id":"b03a1c57-d8ec-48be-9612-f7e24ab71df4","type":"PanTool"},{"id":"75ec3ad4-50a9-4170-b06b-0cbb91ba2c13","type":"WheelZoomTool"},{"id":"b4e3ddbf-9871-45ec-b670-f427c8265c77","type":"BoxZoomTool"},{"id":"26b489e2-f0ee-4088-9865-67a47cbf6569","type":"ResetTool"},{"id":"2f0a460f-4835-4b0b-b9ec-95fcb67e4787","type":"SaveTool"}]},"id":"95c5d51d-02ab-44b1-b9e6-98cca79deb01","type":"Toolbar"},{"attributes":{"plot":{"id":"074c5a27-7e35-47ce-aa3d-38db3878273f","subtype":"Figure","type":"Plot"},"ticker":{"id":"8b6c6159-8300-4605-b19a-eace6d82e34a","type":"BasicTicker"}},"id":"5f416863-0827-4869-bcc8-cbcd89a4e18b","type":"Grid"},{"attributes":{"callback":null,"column_names":["y","x"],"data":{"x":[1.0,2.0,3.0,4.0,5.0,6.0,7.0,8.0,9.0,10.0,11.0,12.0,13.0,14.0,15.0,16.0,17.0,18.0,19.0,20.0,21.0,22.0,23.0,24.0,25.0,26.0,27.0,28.0,29.0,30.0,31.0,32.0,33.0,34.0,35.0,36.0,37.0,38.0,39.0,40.0,41.0,42.0,43.0,44.0,45.0,46.0,47.0,48.0,49.0,50.0,51.0,52.0,53.0,54.0,55.0,56.0,57.0,58.0,59.0,60.0,61.0,62.0,63.0,64.0,65.0,66.0,67.0,68.0,69.0,70.0,71.0,72.0,73.0,74.0,75.0,76.0,77.0,78.0,79.0,80.0,81.0,82.0,83.0,84.0,85.0,86.0,87.0,88.0,89.0,90.0,91.0,92.0,93.0,94.0,95.0,96.0,97.0,98.0,99.0,100.0],"y":[35.0,33.0,34.0,36.0,34.0,31.0,34.0,34.0,33.0,37.0,40.0,31.0,33.0,31.0,36.0,34.0,34.0,37.0,30.0,28.0,27.0,22.0,21.0,21.0,16.0,16.0,17.0,22.0,21.0,15.0,15.0,13.0,4.0,10.0,13.0,6.0,9.0,6.0,8.0,7.0,10.0,10.0,12.0,8.0,7.0,7.0,8.0,8.0,8.0,10.0,9.0,10.0,7.0,11.0,6.0,6.0,8.0,4.0,3.0,12.0,7.0,6.0,4.0,2.0,4.0,5.0,7.0,6.0,4.0,9.0,7.0,7.0,6.0,9.0,4.0,3.0,9.0,15.0,6.0,9.0,9.0,9.0,7.0,7.0,8.0,5.0,6.0,5.0,7.0,6.0,3.0,7.0,5.0,7.0,5.0,8.0,5.0,4.0,3.0,8.0]}},"id":"dcae1c23-03a6-4a9c-9f5e-52b8c3a874f5","type":"ColumnDataSource"},{"attributes":{"fill_alpha":{"value":0.1},"fill_color":{"value":"#1f77b4"},"line_alpha":{"value":0.1},"line_color":{"value":"#1f77b4"},"x":{"field":"x"},"y":{"field":"y"}},"id":"d0a464d4-a994-434b-81df-1b6521fbc341","type":"Square"},{"attributes":{"legends":[["Grass",[{"id":"c1cf64af-a7fe-4299-beee-277e8b5f7b10","type":"GlyphRenderer"},{"id":"e6c4dd61-9229-43eb-899e-caf248466ded","type":"GlyphRenderer"}]],["Sheep",[{"id":"250440ad-2ffd-47bc-a81e-024a9d6c3e07","type":"GlyphRenderer"},{"id":"c558c765-6179-41e1-9dfd-dc44a95c911b","type":"GlyphRenderer"}]],["Wolves",[{"id":"e787a2a1-10c6-48dc-8fa4-7d05446fe408","type":"GlyphRenderer"},{"id":"872af291-c143-49a4-9f17-a53529d1d107","type":"GlyphRenderer"}]]],"plot":{"id":"074c5a27-7e35-47ce-aa3d-38db3878273f","subtype":"Figure","type":"Plot"}},"id":"3950878a-e642-404c-9007-0e08534b853b","type":"Legend"},{"attributes":{"line_color":{"value":"#1f77b4"},"x":{"field":"x"},"y":{"field":"y"}},"id":"e5760784-8f68-4002-9595-0f3c9e266bf3","type":"Line"},{"attributes":{"data_source":{"id":"062c8dfa-5c44-4596-aa72-23b7faee87a2","type":"ColumnDataSource"},"glyph":{"id":"7e518775-7725-4ee4-b9bc-a80f0a1e75c0","type":"Square"},"hover_glyph":null,"nonselection_glyph":{"id":"d0a464d4-a994-434b-81df-1b6521fbc341","type":"Square"},"selection_glyph":null},"id":"250440ad-2ffd-47bc-a81e-024a9d6c3e07","type":"GlyphRenderer"},{"attributes":{"line_color":{"value":"blue"},"line_dash":[4,4],"line_width":{"value":2},"x":{"field":"x"},"y":{"field":"y"}},"id":"ac1c7f0d-0bef-4889-ab0a-7bc958bdce02","type":"Line"},{"attributes":{"data_source":{"id":"dcae1c23-03a6-4a9c-9f5e-52b8c3a874f5","type":"ColumnDataSource"},"glyph":{"id":"ac1c7f0d-0bef-4889-ab0a-7bc958bdce02","type":"Line"},"hover_glyph":null,"nonselection_glyph":{"id":"1d737284-ee17-4143-a98f-c9ff06baaae7","type":"Line"},"selection_glyph":null},"id":"c558c765-6179-41e1-9dfd-dc44a95c911b","type":"GlyphRenderer"},{"attributes":{"callback":null,"column_names":["y","x"],"data":{"x":[1.0,2.0,3.0,4.0,5.0,6.0,7.0,8.0,9.0,10.0,11.0,12.0,13.0,14.0,15.0,16.0,17.0,18.0,19.0,20.0,21.0,22.0,23.0,24.0,25.0,26.0,27.0,28.0,29.0,30.0,31.0,32.0,33.0,34.0,35.0,36.0,37.0,38.0,39.0,40.0,41.0,42.0,43.0,44.0,45.0,46.0,47.0,48.0,49.0,50.0,51.0,52.0,53.0,54.0,55.0,56.0,57.0,58.0,59.0,60.0,61.0,62.0,63.0,64.0,65.0,66.0,67.0,68.0,69.0,70.0,71.0,72.0,73.0,74.0,75.0,76.0,77.0,78.0,79.0,80.0,81.0,82.0,83.0,84.0,85.0,86.0,87.0,88.0,89.0,90.0,91.0,92.0,93.0,94.0,95.0,96.0,97.0,98.0,99.0,100.0],"y":[40.0,34.0,50.0,48.0,41.0,36.0,43.0,36.0,39.0,47.0,11.0,16.0,23.0,11.0,12.0,12.0,13.0,11.0,16.0,12.0,17.0,11.0,18.0,7.0,10.0,16.0,14.0,18.0,18.0,14.0,15.0,23.0,11.0,9.0,17.0,16.0,14.0,19.0,12.0,15.0,15.0,18.0,16.0,12.0,16.0,16.0,16.0,12.0,14.0,16.0,12.0,11.0,12.0,13.0,14.0,13.0,14.0,17.0,13.0,11.0,15.0,16.0,15.0,13.0,13.0,12.0,16.0,12.0,16.0,17.0,11.0,11.0,19.0,10.0,12.0,11.0,12.0,17.0,18.0,14.0,12.0,10.0,11.0,15.0,12.0,15.0,9.0,12.0,10.0,9.0,12.0,12.0,17.0,15.0,12.0,13.0,11.0,12.0,13.0,15.0]}},"id":"2fabb965-5ddc-45c4-9f93-bb2e13ae6be4","type":"ColumnDataSource"},{"attributes":{"dimension":1,"plot":{"id":"074c5a27-7e35-47ce-aa3d-38db3878273f","subtype":"Figure","type":"Plot"},"ticker":{"id":"47599832-ffe0-41f0-8933-218d319d3136","type":"BasicTicker"}},"id":"e4c28b23-e737-4443-ae61-54f507ba8977","type":"Grid"},{"attributes":{"fill_alpha":{"value":0.1},"fill_color":{"value":"#1f77b4"},"line_alpha":{"value":0.1},"line_color":{"value":"#1f77b4"},"x":{"field":"x"},"y":{"field":"y"}},"id":"1214198c-ef5a-4456-9b74-20f438513459","type":"Circle"},{"attributes":{"plot":{"id":"074c5a27-7e35-47ce-aa3d-38db3878273f","subtype":"Figure","type":"Plot"}},"id":"b03a1c57-d8ec-48be-9612-f7e24ab71df4","type":"PanTool"},{"attributes":{"callback":null},"id":"56c37064-459c-4050-bed9-f084a33fe092","type":"DataRange1d"},{"attributes":{"overlay":{"id":"d2e1660c-3119-478f-b736-810003c5e4c9","type":"BoxAnnotation"},"plot":{"id":"074c5a27-7e35-47ce-aa3d-38db3878273f","subtype":"Figure","type":"Plot"}},"id":"b4e3ddbf-9871-45ec-b670-f427c8265c77","type":"BoxZoomTool"},{"attributes":{"data_source":{"id":"2fabb965-5ddc-45c4-9f93-bb2e13ae6be4","type":"ColumnDataSource"},"glyph":{"id":"30db2a6d-e320-4ad1-946f-a9dfcb158231","type":"Circle"},"hover_glyph":null,"nonselection_glyph":{"id":"1214198c-ef5a-4456-9b74-20f438513459","type":"Circle"},"selection_glyph":null},"id":"c1cf64af-a7fe-4299-beee-277e8b5f7b10","type":"GlyphRenderer"},{"attributes":{},"id":"47599832-ffe0-41f0-8933-218d319d3136","type":"BasicTicker"},{"attributes":{"line_alpha":{"value":0.1},"line_color":{"value":"#1f77b4"},"x":{"field":"x"},"y":{"field":"y"}},"id":"3d9cf1dc-2c26-4096-b211-8b7cc3b1708e","type":"Line"},{"attributes":{"data_source":{"id":"8f09e571-25f0-4dfb-9ddd-3bf6ec7fde5a","type":"ColumnDataSource"},"glyph":{"id":"19d62661-5d0e-4ec5-a72f-9c4801ea0e3d","type":"Triangle"},"hover_glyph":null,"nonselection_glyph":{"id":"e9d81860-4a69-4e00-aa9f-5f392ddfafc4","type":"Triangle"},"selection_glyph":null},"id":"e787a2a1-10c6-48dc-8fa4-7d05446fe408","type":"GlyphRenderer"},{"attributes":{"line_color":{"value":"red"},"x":{"field":"x"},"y":{"field":"y"}},"id":"58d466f1-2a9d-4ac9-b73e-7435b2b3611c","type":"Line"},{"attributes":{"callback":null,"column_names":["y","x"],"data":{"x":[1.0,2.0,3.0,4.0,5.0,6.0,7.0,8.0,9.0,10.0,11.0,12.0,13.0,14.0,15.0,16.0,17.0,18.0,19.0,20.0,21.0,22.0,23.0,24.0,25.0,26.0,27.0,28.0,29.0,30.0,31.0,32.0,33.0,34.0,35.0,36.0,37.0,38.0,39.0,40.0,41.0,42.0,43.0,44.0,45.0,46.0,47.0,48.0,49.0,50.0,51.0,52.0,53.0,54.0,55.0,56.0,57.0,58.0,59.0,60.0,61.0,62.0,63.0,64.0,65.0,66.0,67.0,68.0,69.0,70.0,71.0,72.0,73.0,74.0,75.0,76.0,77.0,78.0,79.0,80.0,81.0,82.0,83.0,84.0,85.0,86.0,87.0,88.0,89.0,90.0,91.0,92.0,93.0,94.0,95.0,96.0,97.0,98.0,99.0,100.0],"y":[20.0,25.0,20.0,21.0,21.0,22.0,20.0,21.0,23.0,22.0,21.0,20.0,19.0,21.0,20.0,23.0,21.0,22.0,24.0,23.0,23.0,23.0,23.0,22.0,23.0,21.0,23.0,26.0,22.0,23.0,22.0,23.0,22.0,20.0,21.0,20.0,23.0,21.0,23.0,23.0,23.0,22.0,23.0,21.0,22.0,20.0,22.0,21.0,20.0,21.0,18.0,19.0,18.0,17.0,16.0,16.0,18.0,16.0,16.0,19.0,14.0,12.0,14.0,15.0,12.0,14.0,10.0,11.0,12.0,11.0,10.0,9.0,8.0,9.0,9.0,7.0,9.0,9.0,7.0,8.0,5.0,6.0,7.0,6.0,4.0,5.0,9.0,5.0,5.0,5.0,5.0,7.0,5.0,6.0,4.0,4.0,6.0,5.0,5.0,6.0]}},"id":"37a74bf7-c872-44ae-bbdb-97d173b7926b","type":"ColumnDataSource"},{"attributes":{"callback":null},"id":"af3efc73-84a6-4bab-bc6a-2bc8eb5b70fe","type":"DataRange1d"},{"attributes":{"formatter":{"id":"f14687b6-fba6-426c-b210-1c0c2a6bd485","type":"BasicTickFormatter"},"plot":{"id":"074c5a27-7e35-47ce-aa3d-38db3878273f","subtype":"Figure","type":"Plot"},"ticker":{"id":"47599832-ffe0-41f0-8933-218d319d3136","type":"BasicTicker"}},"id":"98ff32d4-be6e-451a-b504-04a6eced6196","type":"LinearAxis"},{"attributes":{},"id":"f14687b6-fba6-426c-b210-1c0c2a6bd485","type":"BasicTickFormatter"},{"attributes":{"plot":{"id":"074c5a27-7e35-47ce-aa3d-38db3878273f","subtype":"Figure","type":"Plot"}},"id":"75ec3ad4-50a9-4170-b06b-0cbb91ba2c13","type":"WheelZoomTool"},{"attributes":{"fill_alpha":{"value":0.1},"fill_color":{"value":"#1f77b4"},"line_alpha":{"value":0.1},"line_color":{"value":"#1f77b4"},"x":{"field":"x"},"y":{"field":"y"}},"id":"e9d81860-4a69-4e00-aa9f-5f392ddfafc4","type":"Triangle"},{"attributes":{"callback":null,"column_names":["y","x"],"data":{"x":[1.0,2.0,3.0,4.0,5.0,6.0,7.0,8.0,9.0,10.0,11.0,12.0,13.0,14.0,15.0,16.0,17.0,18.0,19.0,20.0,21.0,22.0,23.0,24.0,25.0,26.0,27.0,28.0,29.0,30.0,31.0,32.0,33.0,34.0,35.0,36.0,37.0,38.0,39.0,40.0,41.0,42.0,43.0,44.0,45.0,46.0,47.0,48.0,49.0,50.0,51.0,52.0,53.0,54.0,55.0,56.0,57.0,58.0,59.0,60.0,61.0,62.0,63.0,64.0,65.0,66.0,67.0,68.0,69.0,70.0,71.0,72.0,73.0,74.0,75.0,76.0,77.0,78.0,79.0,80.0,81.0,82.0,83.0,84.0,85.0,86.0,87.0,88.0,89.0,90.0,91.0,92.0,93.0,94.0,95.0,96.0,97.0,98.0,99.0,100.0],"y":[20.0,25.0,20.0,21.0,21.0,22.0,20.0,21.0,23.0,22.0,21.0,20.0,19.0,21.0,20.0,23.0,21.0,22.0,24.0,23.0,23.0,23.0,23.0,22.0,23.0,21.0,23.0,26.0,22.0,23.0,22.0,23.0,22.0,20.0,21.0,20.0,23.0,21.0,23.0,23.0,23.0,22.0,23.0,21.0,22.0,20.0,22.0,21.0,20.0,21.0,18.0,19.0,18.0,17.0,16.0,16.0,18.0,16.0,16.0,19.0,14.0,12.0,14.0,15.0,12.0,14.0,10.0,11.0,12.0,11.0,10.0,9.0,8.0,9.0,9.0,7.0,9.0,9.0,7.0,8.0,5.0,6.0,7.0,6.0,4.0,5.0,9.0,5.0,5.0,5.0,5.0,7.0,5.0,6.0,4.0,4.0,6.0,5.0,5.0,6.0]}},"id":"8f09e571-25f0-4dfb-9ddd-3bf6ec7fde5a","type":"ColumnDataSource"}],"root_ids":["074c5a27-7e35-47ce-aa3d-38db3878273f"]},"title":"Bokeh Application","version":"0.12.1"}};
+            var render_items = [{"docid":"be2fa3ca-59d0-48ee-8154-fa2cec1d8882","elementid":"3eec4ce1-b1fa-445f-add2-3678d0da298f","modelid":"074c5a27-7e35-47ce-aa3d-38db3878273f"}];
+
+            Bokeh.embed.embed_items(docs_json, render_items);
+        });
+        </script>
+
+-->
+
+<!-- <img src="{{ send_to_html }}" style="max-height:100%; max-width:100%"/>
+<!-- /container data:image/png;base64,
+
+     {% with messages = get_flashed_messages() %}
+     {% if messages %}
+    <div class="alert alert-danger" role="alert" align="center">
+      {% for message in messages %}
+    <strong>{{ message }}</strong>
+      {% endfor %}
+    </div>
+     {% endif %}
+     {% endwith %}
+
+     {% if winMsg %}
+    <div class="alert alert-success" role="alert" align="center">
+    <strong>{{ winMsg }}</strong>
+    </div>
+     {% endif %}
+  -->
+
+  <div align="center" style="height:30px"></div>
+
+        <!-- Footer -->
+        <div class="navbar navbar-fixed-bottom">
+        <footer>
+            <div class="row"><div align="center" style="height:12px"></div>
+                <div class="col-md-12" align="center" style="color: #9E9E9E"><p>Copyright &copy; Goran Peic 2016</p></div>
+            </div>
+            <!-- /.row -->
+        </footer>
+        </div>
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="/static/js/jquery.min.js"><\/script>')</script>
+    <script src="/static/js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="/static/js/ie10_workaround.js"></script>
+  </body>
+</html>
