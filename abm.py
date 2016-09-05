@@ -1,4 +1,4 @@
-from flask import Flask, flash, render_template, request
+from flask import Flask, render_template, request
 import pandas as pd
 import numpy as np
 from functions import seedActors, RunSimulation, extractInfo, stacked
@@ -45,7 +45,8 @@ def index():
     dframe = pd.DataFrame(
       {'iter': [1], 'grass_count': initial_info[0], 'sheep_count': initial_info[1], 'wolf_count': initial_info[2]})
     dframe = dframe.ix[:, ['iter', 'grass_count', 'sheep_count', 'wolf_count']]
-    dframe = RunSimulation(simulation_runs=simulation_runs, dataset=dframe, initial_population=initial_population)
+    dframe = RunSimulation(simulation_runs=simulation_runs, dataset=dframe, initial_population=initial_population,
+                           grass_life=grass_life, sheep_life=sheep_life, wolf_life=wolf_life)
     x_iter = dframe.ix[:, 'iter'].values
     y_grass = dframe.ix[:, 'grass_count'].values;
     y_sheep = dframe.ix[:, 'sheep_count'].values;
@@ -85,9 +86,6 @@ def index():
     js_script = html_text[re.search(r"function()", html_text).start() - 8 : re.search("Bokeh.embed.embed_items", html_text).start() + 61]
 
     ### (2) Population Stacked Share Plot
-    # Fix order of colors!
-    # Ability to save previous form inputs to continue experimentation
-    # add padding between plots
 
     dframe2 = dframe[:]
     dframe2['Grass Share'] = dframe2['grass_count'] / (
@@ -114,7 +112,7 @@ def index():
     TOOLS = "pan,box_zoom,undo,reset,save"
     creature_plot2 = figure(x_range=(1, simulation_runs), y_range=(0, 1), title="Population Evolution (Shares)", tools=TOOLS,
                             width=700, height=350, responsive=True, toolbar_location="above")
-    # creature_plot2.grid.minor_grid_line_color = '#eeeeee'
+    creature_plot2.grid.minor_grid_line_color = '#eeeeee'
 
     creature_plot2.patches([iter2] * len(areas), [areas[cat] for cat in categories], color=colors, alpha=1,
                            line_color=None)

@@ -22,18 +22,18 @@ class Actor():
 
 class Grass(Actor):
 
-  def reproduce(self):
+  def reproduce(self, life_amount):
     if int(np.random.choice([0, 1], p=[1 - self.reproduction_rate, self.reproduction_rate])) == 1:
-      offspring = Grass(self.life, self.reproduction_rate, self.position)
+      offspring = Grass(life_amount, self.reproduction_rate, self.position)
       return offspring
     else: return None
 
 
 class Sheep(Actor):
 
-  def reproduce(self):
+  def reproduce(self, life_amount):
     if int(np.random.choice([0, 1], p=[1-self.reproduction_rate, self.reproduction_rate])) == 1:
-      offspring = Sheep(self.life, self.reproduction_rate, self.position)
+      offspring = Sheep(life_amount, self.reproduction_rate, self.position)
       return offspring
     else: return None
 
@@ -50,9 +50,9 @@ class Sheep(Actor):
 
 class Wolf(Actor):
 
-  def reproduce(self):
+  def reproduce(self, life_amount):
     if int(np.random.choice([0, 1], p=[1-self.reproduction_rate, self.reproduction_rate])) == 1:
-      offspring = Wolf(self.life, self.reproduction_rate, self.position)
+      offspring = Wolf(life_amount, self.reproduction_rate, self.position)
       return offspring
     else: return None
 

@@ -3,7 +3,6 @@ import random
 import numpy as np
 from actors import Grass, Sheep, Wolf
 
-
 # grass_reproduction_rate = 0.5; sheep_reproduction_rate = 0.2; wolf_reproduction_rate = 0.1
 # grass_life = 10; sheep_life = 10; wolf_life = 10
 
@@ -51,12 +50,14 @@ def seedActors(dataset, terrain_size, grass, sheep, wolves, grass_reproduction_r
   allTileCoord = [x for x in allTileCoord if x not in wolf_tiles]
   return list(list_of_grass + list_of_sheep + list_of_wolves)
 
-def Live(poplist):
+def Live(poplist, grass_life, sheep_life, wolf_life):
   final_population = poplist[:]
   offspring = []
   actually_deleted = 0
   for creature in poplist:
-    creature_offspring = creature.reproduce()
+    if isinstance(creature, Grass): creature_offspring = creature.reproduce(grass_life)
+    elif isinstance(creature, Sheep): creature_offspring = creature.reproduce(sheep_life)
+    else: creature_offspring = creature.reproduce(wolf_life)
     if creature_offspring is not None:
       final_population.append(creature_offspring)
       offspring.append(creature_offspring)
@@ -75,15 +76,15 @@ def extractInfo(dataset):
   for creature in dataset:
     if isinstance(creature, Grass): number_of_grass += 1
     elif isinstance(creature, Sheep): number_of_sheep += 1
-    else: number_of_wolves += 1
+    elif isinstance(creature, Wolf): number_of_wolves += 1
   current_composition = [number_of_grass, number_of_sheep, number_of_wolves]
   return current_composition
 
-def RunSimulation(simulation_runs, dataset, initial_population):
+def RunSimulation(simulation_runs, dataset, initial_population, grass_life, sheep_life, wolf_life):
   run = 0
   while run < simulation_runs - 1:
     run += 1
-    remaining_population = Live(initial_population)
+    remaining_population = Live(initial_population, grass_life, sheep_life, wolf_life)
     current_info = extractInfo(remaining_population)
     dataset.ix[run, dataset.columns[0]] = run + 1
     dataset.ix[run, dataset.columns[1]] = current_info[0]
