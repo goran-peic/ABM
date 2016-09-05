@@ -45,6 +45,7 @@ class Sheep(Actor):
     if available_grass:
       for sheep in available_grass:
         self.life += sheep.life
+    else: self.life -= 1
     return available_grass
 
 
@@ -63,4 +64,5 @@ class Wolf(Actor):
     if available_sheep:
       for sheep in available_sheep:
         self.life += sheep.life
+    else: self.life -= 1
     return available_sheep
