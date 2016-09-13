@@ -30,7 +30,7 @@ def index():
     sheep_life = int(request.form["sheep_life"])
     wolf_life = int(request.form["wolf_life"])
 
-    if simulation_runs > 1000:
+    if simulation_runs > 300:
       too_many_runs = True
       return render_template("index.html", too_many_runs=too_many_runs)
 
@@ -48,8 +48,8 @@ def index():
     dframe = RunSimulation(simulation_runs=simulation_runs, dataset=dframe, initial_population=initial_population,
                            grass_life=grass_life, sheep_life=sheep_life, wolf_life=wolf_life)
     x_iter = dframe.ix[:, 'iter'].values
-    y_grass = dframe.ix[:, 'grass_count'].values;
-    y_sheep = dframe.ix[:, 'sheep_count'].values;
+    y_grass = dframe.ix[:, 'grass_count'].values
+    y_sheep = dframe.ix[:, 'sheep_count'].values
     y_wolves = dframe.ix[:, 'wolf_count'].values
 
     TOOLS = "pan,box_zoom,hover,undo,reset,save"
@@ -96,7 +96,6 @@ def index():
     dframe2['grass_count'] + dframe2['sheep_count'] + dframe2['wolf_count'])
     dframe2 = dframe2.ix[:, ['iter', 'Grass Share', 'Sheep Share', 'Wolf Share']]
     categories = ['Grass Share', 'Sheep Share', 'Wolf Share']
-    print(dframe2)
     areas = stacked(dframe2, categories)
     colors = list(areas.keys())
     for index, key in enumerate(colors):
@@ -110,7 +109,7 @@ def index():
     iter2 = np.hstack((dframe2['iter'][::-1], dframe2['iter']))
 
     TOOLS = "pan,box_zoom,undo,reset,save"
-    creature_plot2 = figure(x_range=(1, simulation_runs), y_range=(0, 1), title="Population Evolution (Shares)", tools=TOOLS,
+    creature_plot2 = figure(x_range=(1, len(dframe2['iter'])-1), y_range=(0, 1), title="Population Evolution (Shares)", tools=TOOLS,
                             width=700, height=350, responsive=True, toolbar_location="above")
     creature_plot2.grid.minor_grid_line_color = '#eeeeee'
 
@@ -131,7 +130,7 @@ def index():
     for a, area in enumerate(areas):
       creature_plot2.patch(iter2, areas[area], color=colors[a], legend=area, alpha=1, line_color=None)
 
-    creature_plot2.legend.background_fill_color = "#e6e6e6";
+    creature_plot2.legend.background_fill_color = "#e6e6e6"
     creature_plot2.legend.background_fill_alpha = 0.4
     creature_plot2.legend.label_text_font_style = "bold"
 

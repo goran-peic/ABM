@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Simulation</title>
+    <title>Agent-Based Simulation</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="/static/css/bootstrap.min.css" rel="stylesheet">
@@ -79,10 +79,10 @@
         <div class="intro-body">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-8 col-md-offset-2">
-                        <h4 class="brand-heading" style="font-size:55px;">Agent-Based Simulator</h4>
+                    <div class="col-md-9 col-md-offset-2" style="padding-left: 0px">
+                        <h4 class="brand-heading" style="font-size:55px; margin-bottom: 0px; margin-top: 35px">Agent-Based Modeling</h4>
                         <p class="intro-text">
-                            <br>Explore the impact of initial conditions on emergent phenomena in complex systems.</p>
+                            <br>Exploring emergent phenomena in complex systems via simulation</p>
                         <a href="#about" class="btn btn-circle page-scroll">
                             <i class="fa fa-angle-double-down animated"></i>
                         </a>
@@ -111,11 +111,13 @@
                 turn of the game. Each turn, sheep and wolves (sorry, grass) are able to move randomly to one of the adjacent tiles (or remain where they are). All species produce offspring
                 with a certain configurable probability. When a sheep encounters a patch of grass on the same tile, the sheep eats it, adding all
                 its remaining amount of "life" to its own. Similarly, wolves eat any sheep they come across, adding their "life" amounts
-                to their own. Either animal loses one life per turn if it does not find anything to eat. </p>
+                to their own. Either animal loses life each turn it does not find anything to eat. The more turns an animal goes hungry, the greater
+                the starvation penalty.</p>
                 <p style="font-size: 14px; margin-bottom:10px">Ultimately, how these populations evolve depends heavily on the many underlying parameters
                 of the simulation. When dealing with complex, stochastic systems with potentially emergent properties,
-                it is difficult to predict the impact of changing any single condition. This simulation lets you explore just that, but before
-                you do, make sure to familiarize yourself with all configurable parameters.</p>
+                it is difficult to predict the impact of changing any single condition. This simulation lets you explore that, but keep in
+                mind that the results might change from one run to next with no change in parameters due to the stochastic nature
+                of the simulation.</p>
             </div>
             <div class="col-lg-6" align="justify">
                 <h4 style="font-size: 23px" align="center">Parameters</h4>
@@ -129,13 +131,16 @@
                     must not exceed the total number of tiles.</p>
                   <li style="list-style-type:square"><u>Number of Iterations</u></li>
                     <p style="font-size: 14px; margin-bottom:15px">This parameter let you control how long the simulation will run. Think of it as hours or days.
-                    Generally, trends become evident after just 100 to 300 iterations.</p>
+                    Generally, trends become evident after just 100 or 200 iterations. The algorithm will cease automatically
+                    if all species go extinct.</p>
                   <li style="list-style-type:square"><u>Species Lifespan</u></li>
                     <p style="font-size: 14px; margin-bottom:15px">In addition, for each species, you can play around with its longevity by giving them more
                     or less amount of "life" initially. The more "life" they have, the longer it will take for them to die.</p>
                   <li style="list-style-type:square"><u>Species Reproduction Rate</u></li>
                     <p style="font-size: 14px; margin-bottom:15px">Last, the simulation lets you tweak how likely each type of creature is to
-                    produce offspring with each turn.</p>
+                    produce offspring. Sheep and wolf reproduction requires that another sheep or wolf be present in the same
+                    tile. Given more than five members of the same species in a tile, the overcrowding results in a rapidly
+                    decreasing reproduction rate.</p>
                 </ul>
             </div>
         </div>
@@ -159,10 +164,10 @@
                   <p style="padding-bottom:0px; font-size: 20px">Given the parameters you set and the results you observe, can you explain them?</p>
                     <p style="padding-bottom:0px; font-size: 13px">For example, why might grass and sheep populations
                         be more stable without wolves?</p>
-                    <p style="padding-bottom:25px; font-size: 13px">Why might sheep and wolf populations be inversely correlated
-                        under many scenarios?</p>
+                    <p style="padding-bottom:25px; font-size: 13px">Why might sheep and wolf populations exhibit an inverse relationship under
+                        some scenarios?</p>
                   <p style="padding-bottom:0px; font-size: 20px">Some of my own findings...</p>
-                  <p style="padding-bottom:0px; font-size: 13px">Increasing grass life stabilizes wolf population in the long run.</p>
+                  <p style="padding-bottom:0px; font-size: 13px">Increasing grass life stabilizes wolf population in the medium term.</p>
                   <p style="padding-bottom:0px; font-size: 13px">Increasing sheep life has little effect on sheep population in the long run.</p>
                   <p style="padding-bottom:10px; font-size: 13px">Increasing both the number of sheep and their lifespan
                     helps their population survive, but nearly kills off the wolves.</p>
@@ -187,25 +192,25 @@
             <div class="form-group row">
               <label for="size" class="col-sm-2 col-form-label">Board Size</label>
             <div class="col-sm-1">
-              <input type="number" class="form-control" name="terrain_size" id="size" value= {% if plots_created %} {{ terrain_size }} {% else %} "{{ 15 }}" {% endif %}>
+              <input type="number" class="form-control" name="terrain_size" id="size" value= {% if plots_created %} {{ terrain_size }} {% else %} "{{ 10 }}" {% endif %}>
             </div>
             </div>
             <div class="form-group row">
               <label for="grass" class="col-sm-2 col-form-label">Number of Grass</label>
             <div class="col-sm-1">
-              <input type="number" class="form-control" name="grass" id="grass" value={% if plots_created %} {{ grass }} {% else %} "{{ 70 }}" {% endif %}>
+              <input type="number" class="form-control" name="grass" id="grass" value={% if plots_created %} {{ grass }} {% else %} "{{ 20 }}" {% endif %}>
             </div>
             </div>
             <div class="form-group row">
               <label for="sheep" class="col-sm-2 col-form-label">Number of Sheep</label>
               <div class="col-sm-1">
-                <input type="number" class="form-control" id="sheep" name="sheep" value={% if plots_created %} {{ sheep }} {% else %} "{{ 50 }}" {% endif %}>
+                <input type="number" class="form-control" id="sheep" name="sheep" value={% if plots_created %} {{ sheep }} {% else %} "{{ 30 }}" {% endif %}>
              </div>
              </div>
              <div class="form-group row">
                <label for="wolves" class="col-sm-2 col-form-label">Number of Wolves</label>
                <div class="col-sm-1">
-               <input type="number" class="form-control" id="wolves" name="wolves" value={% if plots_created %} {{ wolves }} {% else %} "{{ 40 }}" {% endif %}>
+               <input type="number" class="form-control" id="wolves" name="wolves" value={% if plots_created %} {{ wolves }} {% else %} "{{ 35 }}" {% endif %}>
              </div>
              </div>
              <div class="form-group row">
@@ -241,37 +246,37 @@
             <div class="form-group row">
               <label for="size" class="col-sm-2 col-form-label">Grass Life</label>
             <div class="col-sm-1">
-              <input type="number" class="form-control" name="grass_life" id="grass_life" value={% if plots_created %} {{ grass_life }} {% else %} "{{ 10 }}" {% endif %}>
+              <input type="number" class="form-control" name="grass_life" id="grass_life" value={% if plots_created %} {{ grass_life }} {% else %} "{{ 3 }}" {% endif %}>
             </div>
             </div>
             <div class="form-group row">
               <label for="grass" class="col-sm-2 col-form-label">Sheep Life</label>
             <div class="col-sm-1">
-              <input type="number" class="form-control" name="sheep_life" id="sheep_life" value={% if plots_created %} {{ sheep_life }} {% else %} "{{ 20 }}" {% endif %}>
+              <input type="number" class="form-control" name="sheep_life" id="sheep_life" value={% if plots_created %} {{ sheep_life }} {% else %} "{{ 12 }}" {% endif %}>
             </div>
             </div>
             <div class="form-group row">
               <label for="sheep" class="col-sm-2 col-form-label">Wolf Life</label>
               <div class="col-sm-1">
-                <input type="number" class="form-control" id="wolf_life" name="wolf_life" value={% if plots_created %} {{ wolf_life }} {% else %} "{{ 15 }}" {% endif %}>
+                <input type="number" class="form-control" id="wolf_life" name="wolf_life" value={% if plots_created %} {{ wolf_life }} {% else %} "{{ 18 }}" {% endif %}>
              </div>
              </div>
             <div class="form-group row">
               <label for="size" class="col-sm-2 col-form-label">Grass Reproduction</label>
             <div class="col-sm-1">
-              <input type="number" class="form-control" name="grass_reproduction_rate" id="grass_reproduction_rate" value={% if plots_created %} {{ grass_reproduction_rate }} {% else %} "{{ 0.5 }}" {% endif %} step="0.1">
+              <input type="number" class="form-control" name="grass_reproduction_rate" id="grass_reproduction_rate" value={% if plots_created %} {{ grass_reproduction_rate }} {% else %} "{{ 0.4 }}" {% endif %} step="0.1">
             </div>
             </div>
             <div class="form-group row">
               <label for="grass" class="col-sm-2 col-form-label">Sheep Reproduction</label>
             <div class="col-sm-1">
-              <input type="number" class="form-control" name="sheep_reproduction_rate" id="sheep_reproduction_rate" value={% if plots_created %} {{ sheep_reproduction_rate }} {% else %} "{{ 0.3 }}" {% endif %} step="0.1">
+              <input type="number" class="form-control" name="sheep_reproduction_rate" id="sheep_reproduction_rate" value={% if plots_created %} {{ sheep_reproduction_rate }} {% else %} "{{ 0.5 }}" {% endif %} step="0.1">
             </div>
             </div>
             <div class="form-group row">
               <label for="sheep" class="col-sm-2 col-form-label">Wolf Reproduction</label>
               <div class="col-sm-1">
-                <input type="number" class="form-control" id="wolf_reproduction_rate" name="wolf_reproduction_rate" value={% if plots_created %} {{ wolf_reproduction_rate }} {% else %} "{{ 0.2 }}" {% endif %} step="0.1">
+                <input type="number" class="form-control" id="wolf_reproduction_rate" name="wolf_reproduction_rate" value={% if plots_created %} {{ wolf_reproduction_rate }} {% else %} "{{ 0.3 }}" {% endif %} step="0.1">
              </div>
              </div>
         </form>
