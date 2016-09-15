@@ -97,4 +97,5 @@ class Wolf(Actor):
     else:
       self.consecutive_starve += 1
       self.life -= self.consecutive_starve
+      print('wolf just starved')
     return available_sheep
