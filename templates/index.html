@@ -216,7 +216,7 @@
              <div class="form-group row">
                <label for="runs" class="col-sm-2 col-form-label">Number of Iterations</label>
                <div class="col-sm-1">
-               <input type="number" class="form-control" name="simulation_runs" id="runs" value={% if plots_created %} {{ simulation_runs }} {% else %} "{{ 250 }}" {% endif %}>
+               <input type="number" class="form-control" name="simulation_runs" id="runs" value={% if plots_created %} {{ simulation_runs }} {% else %} "{{ 100 }}" {% endif %}>
              </div>
              </div>
 <!--        </form> -->
@@ -264,7 +264,7 @@
             <div class="form-group row">
               <label for="size" class="col-sm-2 col-form-label">Grass Reproduction</label>
             <div class="col-sm-1">
-              <input type="number" class="form-control" name="grass_reproduction_rate" id="grass_reproduction_rate" value={% if plots_created %} {{ grass_reproduction_rate }} {% else %} "{{ 0.4 }}" {% endif %} step="0.1">
+              <input type="number" class="form-control" name="grass_reproduction_rate" id="grass_reproduction_rate" value={% if plots_created %} {{ grass_reproduction_rate }} {% else %} "{{ 0.35 }}" {% endif %} step="0.1">
             </div>
             </div>
             <div class="form-group row">
