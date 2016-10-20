@@ -9,9 +9,11 @@ from bokeh.resources import CDN
 from jinja2 import Environment
 import re
 
+
 env = Environment(extensions=['jinja2.ext.autoescape'])
 app = Flask(__name__)
 app.config["SECRET_KEY"] = "ITSASECRET"
+
 
 @app.route("/", methods=["GET", "POST"])
 def index():
@@ -65,7 +67,8 @@ def index():
       creature_plot.yaxis.axis_label_text_color = "white"
     creature_plot.xaxis.major_tick_line_color = creature_plot.xaxis.minor_tick_line_color = \
       creature_plot.yaxis.minor_tick_line_color = creature_plot.yaxis.major_tick_line_color = "white"
-    creature_plot.title.text_color = creature_plot.xaxis.major_label_text_color = creature_plot.yaxis.major_label_text_color = "white"
+    creature_plot.title.text_color = creature_plot.xaxis.major_label_text_color = \
+      creature_plot.yaxis.major_label_text_color = "white"
     creature_plot.xaxis.axis_line_color = creature_plot.yaxis.axis_line_color = "white"
 
     creature_plot.circle(x_iter, y_grass, legend="Grass", fill_color="green")
@@ -83,7 +86,8 @@ def index():
     html_text = file_html(creature_plot, CDN, "Population Evolution")
     element_id = html_text[
                  re.search("elementid", html_text).start() + 12: re.search("elementid", html_text).start() + 48]
-    js_script = html_text[re.search(r"function()", html_text).start() - 8 : re.search("Bokeh.embed.embed_items", html_text).start() + 61]
+    js_script = html_text[re.search(r"function()", html_text).start() - 8 : re.search("Bokeh.embed.embed_items",
+                                                                                      html_text).start() + 61]
 
     ### (2) Population Stacked Share Plot
 
@@ -109,8 +113,8 @@ def index():
     iter2 = np.hstack((dframe2['iter'][::-1], dframe2['iter']))
 
     TOOLS = "pan,box_zoom,undo,reset,save"
-    creature_plot2 = figure(x_range=(1, len(dframe2['iter'])-1), y_range=(0, 1), title="Population Evolution (Shares)", tools=TOOLS,
-                            width=700, height=350, responsive=True, toolbar_location="above")
+    creature_plot2 = figure(x_range=(1, len(dframe2['iter'])-1), y_range=(0, 1), title="Population Evolution (Shares)",
+                            tools=TOOLS, width=700, height=350, responsive=True, toolbar_location="above")
     creature_plot2.grid.minor_grid_line_color = '#eeeeee'
 
     creature_plot2.patches([iter2] * len(areas), [areas[cat] for cat in categories], color=colors, alpha=1,
@@ -124,7 +128,8 @@ def index():
       creature_plot2.yaxis.axis_label_text_color = "white"
     creature_plot2.xaxis.major_tick_line_color = creature_plot2.xaxis.minor_tick_line_color = \
       creature_plot2.yaxis.minor_tick_line_color = creature_plot2.yaxis.major_tick_line_color = "white"
-    creature_plot2.title.text_color = creature_plot2.xaxis.major_label_text_color = creature_plot2.yaxis.major_label_text_color = "white"
+    creature_plot2.title.text_color = creature_plot2.xaxis.major_label_text_color = \
+      creature_plot2.yaxis.major_label_text_color = "white"
     creature_plot2.xaxis.axis_line_color = creature_plot2.yaxis.axis_line_color = "white"
 
     for a, area in enumerate(areas):
@@ -139,7 +144,8 @@ def index():
     html_text2 = file_html(creature_plot2, CDN, "Population Evolution")
     element_id2 = html_text2[
                  re.search("elementid", html_text2).start() + 12: re.search("elementid", html_text2).start() + 48]
-    js_script2 = html_text2[re.search(r"function()", html_text2).start() - 8 : re.search("Bokeh.embed.embed_items", html_text2).start() + 61]
+    js_script2 = html_text2[re.search(r"function()", html_text2).start() - 8 : re.search("Bokeh.embed.embed_items",
+                                                                                         html_text2).start() + 61]
 
     plots_created = True
     return render_template('index.html', element_id=element_id, js_script=js_script, plots_created=plots_created,
@@ -149,4 +155,4 @@ def index():
                            grass_life=grass_life, sheep_life=sheep_life, wolf_life=wolf_life)
 
 if __name__ == "__main__":
-  app.run(debug=True)
+  app.run(debug=False)

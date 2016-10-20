@@ -30,9 +30,9 @@ class Grass(Actor):
         offspring = Grass(life_amount, self.reproduction_rate, self.position)
         return offspring
       else: return None
-    elif len(available_grass) > 3:
-      reduced_reproduction_rate = (self.reproduction_rate/len(available_grass)**2)/\
-                                  ((self.reproduction_rate/len(available_grass)**2) + (1 - self.reproduction_rate))
+    elif len(available_grass) > 2:
+      reduced_reproduction_rate = (self.reproduction_rate/len(available_grass)**4)/\
+                                  ((self.reproduction_rate/len(available_grass)**4) + (1 - self.reproduction_rate))
       if int(np.random.choice([0, 1], p=[1 - reduced_reproduction_rate, reduced_reproduction_rate])) == 1:
         offspring = Grass(life_amount, self.reproduction_rate, self.position)
         return offspring
@@ -45,13 +45,13 @@ class Sheep(Actor):
   def reproduce(self, life_amount, poplist):
     available_sheep = [creature for creature in poplist if creature.position == self.position and isinstance(creature, Sheep)]
     if len(available_sheep) <= 3 and len(available_sheep) > 0:
-      # increased_reproduction_rate = self.reproduction_rate / (self.reproduction_rate + (1 - self.reproduction_rate) / len(available_sheep) ** 0.3)
       if int(np.random.choice([0, 1], p=[1-self.reproduction_rate, self.reproduction_rate])) == 1:
         offspring = Sheep(life_amount, self.reproduction_rate, self.position)
         return offspring
       else: return None
     elif len(available_sheep) > 3:
-      reduced_reproduction_rate = (self.reproduction_rate/len(available_sheep)**2)/((self.reproduction_rate/len(available_sheep)**2) + (1 - self.reproduction_rate))
+      reduced_reproduction_rate = (self.reproduction_rate/len(available_sheep)**3)/\
+                                  ((self.reproduction_rate/len(available_sheep)**3) + (1 - self.reproduction_rate))
       if int(np.random.choice([0, 1], p=[1 - reduced_reproduction_rate, reduced_reproduction_rate])) == 1:
         offspring = Grass(life_amount, self.reproduction_rate, self.position)
         return offspring
@@ -75,13 +75,13 @@ class Wolf(Actor):
   def reproduce(self, life_amount, poplist):
     available_wolves = [creature for creature in poplist if creature.position == self.position and isinstance(creature, Wolf)]
     if len(available_wolves) <= 3 and len(available_wolves) > 0:
-      # increased_reproduction_rate = self.reproduction_rate / (self.reproduction_rate + (1 - self.reproduction_rate) / len(available_wolves) ** 0.3)
       if int(np.random.choice([0, 1], p=[1 - self.reproduction_rate, self.reproduction_rate])) == 1:
         offspring = Wolf(life_amount, self.reproduction_rate, self.position)
         return offspring
       else: return None
     elif len(available_wolves) > 3:
-      reduced_reproduction_rate = (self.reproduction_rate/len(available_wolves)**2)/((self.reproduction_rate/len(available_wolves)**2) + (1 - self.reproduction_rate))
+      reduced_reproduction_rate = (self.reproduction_rate/len(available_wolves)**3)/\
+                                  ((self.reproduction_rate/len(available_wolves)**3) + (1 - self.reproduction_rate))
       if int(np.random.choice([0, 1], p=[1 - reduced_reproduction_rate, reduced_reproduction_rate])) == 1:
         offspring = Grass(life_amount, self.reproduction_rate, self.position)
         return offspring
