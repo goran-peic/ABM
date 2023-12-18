@@ -4,7 +4,7 @@ import numpy as np
 from functions import seedActors, RunSimulation, extractInfo, stacked
 from bokeh.plotting import figure
 from bokeh.models import NumeralTickFormatter
-from bokeh.embed import file_html
+from bokeh.embed import file_html, components
 from bokeh.resources import CDN
 from jinja2 import Environment
 import re
