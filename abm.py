@@ -46,13 +46,13 @@ def index():
     initial_info = extractInfo(initial_population)
     dframe = pd.DataFrame(
       {'iter': [1], 'grass_count': initial_info[0], 'sheep_count': initial_info[1], 'wolf_count': initial_info[2]})
-    dframe = dframe.ix[:, ['iter', 'grass_count', 'sheep_count', 'wolf_count']]
+    dframe = dframe.iloc[:, ['iter', 'grass_count', 'sheep_count', 'wolf_count']]
     dframe = RunSimulation(simulation_runs=simulation_runs, dataset=dframe, initial_population=initial_population,
                            grass_life=grass_life, sheep_life=sheep_life, wolf_life=wolf_life)
-    x_iter = dframe.ix[:, 'iter'].values
-    y_grass = dframe.ix[:, 'grass_count'].values
-    y_sheep = dframe.ix[:, 'sheep_count'].values
-    y_wolves = dframe.ix[:, 'wolf_count'].values
+    x_iter = dframe.iloc[:, 'iter'].values
+    y_grass = dframe.iloc[:, 'grass_count'].values
+    y_sheep = dframe.iloc[:, 'sheep_count'].values
+    y_wolves = dframe.iloc[:, 'wolf_count'].values
 
     TOOLS = "pan,box_zoom,hover,undo,reset,save"
 
@@ -98,7 +98,7 @@ def index():
     dframe2['grass_count'] + dframe2['sheep_count'] + dframe2['wolf_count'])
     dframe2['Wolf Share'] = dframe2['wolf_count'] / (
     dframe2['grass_count'] + dframe2['sheep_count'] + dframe2['wolf_count'])
-    dframe2 = dframe2.ix[:, ['iter', 'Grass Share', 'Sheep Share', 'Wolf Share']]
+    dframe2 = dframe2.iloc[:, ['iter', 'Grass Share', 'Sheep Share', 'Wolf Share']]
     categories = ['Grass Share', 'Sheep Share', 'Wolf Share']
     areas = stacked(dframe2, categories)
     colors = list(areas.keys())
