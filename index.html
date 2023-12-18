@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Agent-Based Simulation</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="/static/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+
+    <!-- Theme CSS -->
+    <link href="/static/css/grayscale.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/bokeh-0.12.1.min.css" type="text/css" />
+    <script type="text/javascript" src="/static/js/bokeh-0.12.1.min.js"></script>
+    <script type="text/javascript">Bokeh.set_log_level("info");</script>
+
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+
+    <![endif]-->
+
+</head>
+
+<body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
+                    Menu <i class="fa fa-bars"></i>
+                </button>
+                <a class="navbar-brand page-scroll" href="#page-top">
+                    <i class="fa fa-play-circle"></i> <span class="light">Back to Top</span>
+                </a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
+                <ul class="nav navbar-nav">
+                    <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
+                    <li class="hidden">
+                        <a href="#page-top"></a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#about">About</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#questions">Questions</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#setup">Setup</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#results">Results</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <!-- Intro Header -->
+    <header class="intro">
+        <div class="intro-body">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-9 col-md-offset-2" style="padding-left: 0px">
+                        <h4 class="brand-heading" style="font-size:55px; margin-bottom: 0px; margin-top: 35px">Agent-Based Modeling</h4>
+                        <p class="intro-text">
+                            <br>Exploring emergent phenomena in complex systems via simulation</p>
+                        <a href="#about" class="btn btn-circle page-scroll">
+                            <i class="fa fa-angle-double-down animated"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- About Section -->
+    <div class="row"><div align="center" style="height:15px"></div>
+    <section id="about" class="container content-section text-center">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+                <h2>About the Simulation</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6" align="justify">
+                <div id="floated"><img src="/static/img/tiles_explained.jpg" style="padding-bottom: 2px; padding-right: 20px"/></div>
+                <p style="font-size: 14px; margin-bottom:10px">This web application runs an agent-based simulation and plots the evolution of the initial population over time.
+                The game is intended to illustrate emergent properties of complex systems (see <a href="http://ccl.northwestern.edu/netlogo/models/WolfSheepPredation" target="_blank">Wilensky and Reisman 1999</a>). Users are able to specify nearly all
+                parameters of the game such as number of species, their lifespan, and reproduction rates.</p>
+                <p style="font-size: 14px; margin-bottom:10px"><u>Game Rules</u>. The simulation features three species: grass, sheep, and wolves inhabiting
+                a board space composed of tiles. Every member of a species is instantiated with a certain amount of life that is drained with each
+                turn of the game. Each turn, sheep and wolves (sorry, grass) are able to move randomly to one of the adjacent tiles (or remain where they are). All species produce offspring
+                with a certain configurable probability. When a sheep encounters a patch of grass on the same tile, the sheep eats it, adding all
+                its remaining amount of "life" to its own. Similarly, wolves eat any sheep they come across, adding their "life" amounts
+                to their own. Either animal loses life each turn it does not find anything to eat. The more turns an animal goes hungry, the greater
+                the starvation penalty.</p>
+                <p style="font-size: 14px; margin-bottom:10px">Ultimately, how these populations evolve depends heavily on the many underlying parameters
+                of the simulation. When dealing with complex, stochastic systems with potentially emergent properties,
+                it is difficult to predict the impact of changing any single condition. This simulation lets you explore that, but keep in
+                mind that the results might change from one run to next with no change in parameters due to the stochastic nature
+                of the simulation.</p>
+            </div>
+            <div class="col-lg-6" align="justify">
+                <h4 style="font-size: 23px" align="center">Parameters</h4>
+                <ul>
+                  <li style="list-style-type:square"><u>Size of Board Space</u></li>
+                    <p style="font-size: 14px; margin-bottom:15px">This parameter lets you specify the number of tiles on either axis.
+                    The total number of tiles is equal to the square of input provided (say, 15 * 15 = 225 tiles).</p>
+                  <li style="list-style-type:square"><u>Number of Species</u></li>
+                    <p style="font-size: 14px; margin-bottom:15px">The game also allows you to specify how many members of each species you
+                    want in your initial population. To ensure equidispersion across the board, the total number of initial creatures
+                    must not exceed the total number of tiles.</p>
+                  <li style="list-style-type:square"><u>Number of Iterations</u></li>
+                    <p style="font-size: 14px; margin-bottom:15px">This parameter let you control how long the simulation will run. Think of it as hours or days.
+                    Generally, trends become evident after just 100 or 200 iterations. The algorithm will cease automatically
+                    if all species go extinct.</p>
+                  <li style="list-style-type:square"><u>Species Lifespan</u></li>
+                    <p style="font-size: 14px; margin-bottom:15px">In addition, for each species, you can play around with its longevity by giving them more
+                    or less amount of "life" initially. The more "life" they have, the longer it will take for them to die.</p>
+                  <li style="list-style-type:square"><u>Species Reproduction Rate</u></li>
+                    <p style="font-size: 14px; margin-bottom:15px">Last, the simulation lets you tweak how likely each type of creature is to
+                    produce offspring. Sheep and wolf reproduction requires that another sheep or wolf be present in the same
+                    tile. Given more than five members of the same species in a tile, the overcrowding results in a rapidly
+                    decreasing reproduction rate.</p>
+                </ul>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- Questions Section -->
+    <section id="questions" class="container content-section text-center">
+        <div class="row"><div class="col-sm-1"></div>
+            <div class="col-sm-10">
+                <h4 style="font-size: 30px" align="center">Questions</h4>
+                <ul>
+                  <p style="padding-bottom:0px; font-size: 20px">Under what conditions do we observe extinction of various species?</p>
+
+                    <p style="padding-bottom:0px; font-size: 13px"><u>Hint</u>: Try reducing initial amount of grass close to zero, or</p>
+                    <p style="padding-bottom:0px; font-size: 13px"><u>Hint</u>: Dramatically increase wolf population, or</p>
+                    <p style="padding-bottom:25px; font-size: 13px"><u>Hint</u>: Increase sheep reproduction rate.</p>
+
+                  <p style="padding-bottom:0px; font-size: 20px">Conversely, when do we see stable patterns emerge (i.e., non-extinction)?</p>
+                    <p style="padding-bottom:25px; font-size: 13px"><u>Hint</u>: What happens if you eliminate wolves from the initial population?</p>
+                  <p style="padding-bottom:0px; font-size: 20px">Given the parameters you set and the results you observe, can you explain them?</p>
+                    <p style="padding-bottom:0px; font-size: 13px">For example, why might grass and sheep populations
+                        be more stable without wolves?</p>
+                    <p style="padding-bottom:25px; font-size: 13px">Why might sheep and wolf populations exhibit an inverse relationship (many sheep and few
+                        wolves or vice versa)?</p>
+                  <p style="padding-bottom:0px; font-size: 20px">Some of my own findings...</p>
+                  <p style="padding-bottom:0px; font-size: 13px">Increasing grass life stabilizes wolf population in the medium term.</p>
+                  <p style="padding-bottom:0px; font-size: 13px">Increasing sheep life has little effect on sheep population in the long run.</p>
+                  <p style="padding-bottom:0px; font-size: 13px">Increasing both the number of sheep and their lifespan
+                    helps sheep population survive but nearly kills off wolves.</p>
+                  <p style="padding-bottom:10px; font-size: 13px">As Keynes said, "[i]n the long run we are all dead" -- except grass!</p>
+                </ul>
+            </div>
+          <div class="col-sm-1"></div>
+        </div>
+    </section>
+
+    <!-- Configuration Section -->
+    <section id="setup" class="content-section text-center" style="padding-top: 90px">
+<div class="row"><div class="col-md-12"><h4 style="font-size: 25px">Set Parameters</h4></div></div>
+
+    <div class="row">
+      <div class="container">
+        <div class="col-md-4">
+
+    <div class="container theme-showcase" role="main">
+      <div align="center" style="height:20px"></div>
+        <div class="container">
+          <form method="post">
+            <div class="form-group row">
+              <label for="size" class="col-sm-2 col-form-label">Board Size</label>
+            <div class="col-sm-1">
+              <input type="number" class="form-control" name="terrain_size" id="size" value= {% if plots_created %} {{ terrain_size }} {% else %} "{{ 10 }}" {% endif %}>
+            </div>
+            </div>
+            <div class="form-group row">
+              <label for="grass" class="col-sm-2 col-form-label">Number of Grass</label>
+            <div class="col-sm-1">
+              <input type="number" class="form-control" name="grass" id="grass" value={% if plots_created %} {{ grass }} {% else %} "{{ 20 }}" {% endif %}>
+            </div>
+            </div>
+            <div class="form-group row">
+              <label for="sheep" class="col-sm-2 col-form-label">Number of Sheep</label>
+              <div class="col-sm-1">
+                <input type="number" class="form-control" id="sheep" name="sheep" value={% if plots_created %} {{ sheep }} {% else %} "{{ 45 }}" {% endif %}>
+             </div>
+             </div>
+             <div class="form-group row">
+               <label for="wolves" class="col-sm-2 col-form-label">Number of Wolves</label>
+               <div class="col-sm-1">
+               <input type="number" class="form-control" id="wolves" name="wolves" value={% if plots_created %} {{ wolves }} {% else %} "{{ 25 }}" {% endif %}>
+             </div>
+             </div>
+             <div class="form-group row">
+               <label for="runs" class="col-sm-2 col-form-label">Number of Iterations</label>
+               <div class="col-sm-1">
+               <input type="number" class="form-control" name="simulation_runs" id="runs" value={% if plots_created %} {{ simulation_runs }} {% else %} "{{ 100 }}" {% endif %}>
+             </div>
+             </div>
+<!--        </form> -->
+      </div>
+    </div>
+  </div>
+          <div class="col-md-4" style="padding-top: 22px">
+
+<img src="/static/img/tiles_explained.jpg"/>
+
+<div class="row" style="padding-top: 65px">
+    <div class="col-md-12">
+      <div align="center">
+         <button class="btn btn-danger" type="submit" value="send" name="runsim">Run Simulation</button>
+      </div>
+    </div>
+</div>
+
+          </div>
+
+<div class="col-md-4">
+
+<div class="container theme-showcase" role="main">
+      <div align="center" style="height:20px"></div>
+        <div class="container">
+<!--          <form method="post"> -->
+            <div class="form-group row">
+              <label for="size" class="col-sm-2 col-form-label">Grass Life</label>
+            <div class="col-sm-1">
+              <input type="number" class="form-control" name="grass_life" id="grass_life" value={% if plots_created %} {{ grass_life }} {% else %} "{{ 8 }}" {% endif %}>
+            </div>
+            </div>
+            <div class="form-group row">
+              <label for="grass" class="col-sm-2 col-form-label">Sheep Life</label>
+            <div class="col-sm-1">
+              <input type="number" class="form-control" name="sheep_life" id="sheep_life" value={% if plots_created %} {{ sheep_life }} {% else %} "{{ 14 }}" {% endif %}>
+            </div>
+            </div>
+            <div class="form-group row">
+              <label for="sheep" class="col-sm-2 col-form-label">Wolf Life</label>
+              <div class="col-sm-1">
+                <input type="number" class="form-control" id="wolf_life" name="wolf_life" value={% if plots_created %} {{ wolf_life }} {% else %} "{{ 25 }}" {% endif %}>
+             </div>
+             </div>
+            <div class="form-group row">
+              <label for="size" class="col-sm-2 col-form-label">Grass Reproduction</label>
+            <div class="col-sm-1">
+              <input type="number" class="form-control" name="grass_reproduction_rate" id="grass_reproduction_rate" value={% if plots_created %} {{ grass_reproduction_rate }} {% else %} "{{ 0.35 }}" {% endif %} step="0.1">
+            </div>
+            </div>
+            <div class="form-group row">
+              <label for="grass" class="col-sm-2 col-form-label">Sheep Reproduction</label>
+            <div class="col-sm-1">
+              <input type="number" class="form-control" name="sheep_reproduction_rate" id="sheep_reproduction_rate" value={% if plots_created %} {{ sheep_reproduction_rate }} {% else %} "{{ 0.7 }}" {% endif %} step="0.1">
+            </div>
+            </div>
+            <div class="form-group row">
+              <label for="sheep" class="col-sm-2 col-form-label">Wolf Reproduction</label>
+              <div class="col-sm-1">
+                <input type="number" class="form-control" id="wolf_reproduction_rate" name="wolf_reproduction_rate" value={% if plots_created %} {{ wolf_reproduction_rate }} {% else %} "{{ 0.2 }}" {% endif %} step="0.1">
+             </div>
+             </div>
+        </form>
+      </div>
+    </div>
+
+    </div>
+  </div>
+
+</div>
+<div class="row"><div align="center" style="height:15px"></div>
+<div class="row">
+  <div class="col-md-12">
+    <div align="center">
+    <a href="#results" class="btn btn-circle page-scroll"><i class="fa fa-angle-double-down animated"></i></a>
+    </div>
+  </div>
+</div>
+
+     {% if too_many_runs %}
+    <div class="alert alert-danger" role="alert" align="center" style="margin-top: 15px; font-color: white; background-color: #e6e6e6; border-color: #e6e6e6">
+    <strong>Let's keep it real. You really don't need more than 1,000 iterations, do you?</strong>
+    </div>
+     {% endif %}
+
+    </section>
+
+    <!-- Results Section -->
+<div class="row"><div align="center" style="height:15px"></div>
+<div id="wrapper" style="min-height: 70%">
+    <section id="results" class="container content-section text-center">
+
+{% if plots_created %}
+
+<div class="row"><div class="col-md-12"><h4 style="font-size: 25px">Results</h4></div></div>
+
+<div class="col-md-12">
+    <div class="bk-root">
+        <div class="plotdiv" id="{{ element_id }}"></div>
+    </div>
+</div>
+
+<script type="text/javascript"> {{ js_script|safe }} </script>
+<div class="col-md-12">
+    <div class="bk-root" style="padding-top:50px">
+        <div class="plotdiv" id="{{ element_id2 }}"></div>
+    </div>
+</div>
+
+<script type="text/javascript"> {{ js_script2|safe }} </script>
+{% endif %}
+
+    </section>
+</div>
+    <!-- Footer -->
+    <footer>
+        <div class="container text-center">
+            <p>Copyright &copy; Goran Peic 2016</p>
+        </div>
+    </footer>
+
+    <!-- jQuery
+    <script src="/static/js/jquery.js"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="/static/js/jquery.min.js"><\/script>')</script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="/static/js/bootstrap.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="/static/js/jquery.easing.min.js"></script>
+
+    <!-- Theme JavaScript -->
+    <script src="/static/js/grayscale.min.js"></script>
+
+{% if plots_created %}
+<script> $(function(){ window.location.hash = "setup"; }); </script>
+{% endif %}
+
+</body>
+
+</html>
