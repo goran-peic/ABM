@@ -12,15 +12,15 @@ def assignToTiles(dataset, creature, tiles, grass_reproduction_rate, sheep_repro
   list_of_creatures = []
   for row, col in tiles:
     if creature == "grass":
-      dataset.ix[row, col] = 1
+      dataset.loc[row, col] = 1
       list_of_creatures.append(actors.Grass(life=grass_life, reproduction_rate=grass_reproduction_rate,
                                             position=[row, col]))
     elif creature == "sheep":
-      dataset.ix[row, col] = 2
+      dataset.loc[row, col] = 2
       list_of_creatures.append(actors.Sheep(life=sheep_life, reproduction_rate=sheep_reproduction_rate,
                                             position=[row, col]))
     elif creature == "wolf":
-      dataset.ix[row, col] = 3
+      dataset.loc[row, col] = 3
       list_of_creatures.append(actors.Wolf(life=wolf_life, reproduction_rate=wolf_reproduction_rate,
                                            position=[row, col]))
     else: print("Please enter a valid creature: grass, sheep, or wolf.")
@@ -107,10 +107,10 @@ def RunSimulation(simulation_runs, dataset, initial_population, grass_life, shee
   while run < simulation_runs and len(initpop) > 0:
     remaining_population = Live(initpop, grass_life, sheep_life, wolf_life)[:]
     current_info = extractInfo(remaining_population)
-    dataset.ix[run, dataset.columns[0]] = run + 1
-    dataset.ix[run, dataset.columns[1]] = current_info[0]
-    dataset.ix[run, dataset.columns[2]] = current_info[1]
-    dataset.ix[run, dataset.columns[3]] = current_info[2]
+    dataset.loc[run, dataset.columns[0]] = run + 1
+    dataset.loc[run, dataset.columns[1]] = current_info[0]
+    dataset.loc[run, dataset.columns[2]] = current_info[1]
+    dataset.loc[run, dataset.columns[3]] = current_info[2]
     run += 1
     initpop = remaining_population[:]
   return dataset
