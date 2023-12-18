@@ -113,7 +113,7 @@ def index():
 
     TOOLS = "pan,box_zoom,undo,reset,save"
     creature_plot2 = figure(x_range=(1, len(dframe2['iter'])-1), y_range=(0, 1), title="Population Evolution (Shares)",
-                            tools=TOOLS, width=700, height=350, responsive=True, toolbar_location="above")
+                            tools=TOOLS, width=700, height=350, toolbar_location="above")
     creature_plot2.grid.minor_grid_line_color = '#eeeeee'
 
     creature_plot2.patches([iter2] * len(areas), [areas[cat] for cat in categories], color=colors, alpha=1,
