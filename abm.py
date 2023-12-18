@@ -86,7 +86,7 @@ def index():
     html_text = file_html(creature_plot, CDN, "Population Evolution")
     script_1, div = components(creature_plot)
     doc_id = html_text[re.search("docid", html_text).start() + 8: re.search("docid", html_text).start() + 44]
-    element_id = html_text[re.search("elementid", script_1).start() + 12: re.search("elementid", script_1).start() + 48]
+    element_id = script_1[re.search("elementid", script_1).start() + 12: re.search("elementid", script_1).start() + 48]
     js_script = html_text[re.search(r"function()", html_text).start() - 8 : re.search("Bokeh.embed.embed_items",
                                                                                       html_text).start() + 61]
 
