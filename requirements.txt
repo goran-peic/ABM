@@ -3,5 +3,5 @@ flask
 psycopg2
 numpy
 pandas
-bokeh
+bokeh==2.0.0
 jinja2
