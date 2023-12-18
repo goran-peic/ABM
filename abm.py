@@ -84,11 +84,7 @@ def index():
     # creature_plot.legend.label_text_font_style = "bold"
 
     html_text = file_html(creature_plot, CDN, "Population Evolution")
-    try:
-      element_id = html_text[re.search("elementid", html_text).start() + 12: re.search("elementid", html_text).start() + 48]
-    except AttributeError:
-      element_id = html_text[re.search("elementid", html_text) + 12: re.search("elementid", html_text) + 48]
-        
+    #element_id = html_text[re.search("elementid", html_text).start() + 12: re.search("elementid", html_text).start() + 48]
     js_script = html_text[re.search(r"function()", html_text).start() - 8 : re.search("Bokeh.embed.embed_items",
                                                                                       html_text).start() + 61]
 
