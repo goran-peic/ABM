@@ -58,7 +58,7 @@ def index():
 
     ### (1) Population Evolution Plot
     creature_plot = figure(title="Population Evolution (Counts)", tools=TOOLS, width=700, height=350,
-                           responsive=True, toolbar_location="above")
+                           toolbar_location="above")
     creature_plot.background_fill_color = "#f4f4f4"
     creature_plot.min_border_left = 20
     creature_plot.background_fill_alpha = 0.68
