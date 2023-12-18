@@ -71,17 +71,17 @@ def index():
       creature_plot.yaxis.major_label_text_color = "white"
     creature_plot.xaxis.axis_line_color = creature_plot.yaxis.axis_line_color = "white"
 
-    # creature_plot.circle(x_iter, y_grass, legend="Grass", fill_color="green")
-    creature_plot.line(x_iter, y_grass, legend="Grass", line_color="green", line_width=2)
+    creature_plot.circle(x_iter, y_grass, legend_label="Grass", fill_color="green")
+    creature_plot.line(x_iter, y_grass, legend_label="Grass", line_color="green", line_width=2)
 
-    creature_plot.square(x_iter, y_sheep, legend="Sheep", fill_color="#ffffff")
-    creature_plot.line(x_iter, y_sheep, legend="Sheep", line_color="#ffffff", line_width=2)
+    creature_plot.square(x_iter, y_sheep, legend_label="Sheep", fill_color="#ffffff")
+    creature_plot.line(x_iter, y_sheep, legend_label="Sheep", line_color="#ffffff", line_width=2)
 
-    creature_plot.triangle(x_iter, y_wolves, legend="Wolves", fill_color="red", line_color="red")
-    creature_plot.line(x_iter, y_wolves, legend="Wolves", line_color="red", line_width=2)
+    creature_plot.triangle(x_iter, y_wolves, legend_label="Wolves", fill_color="red", line_color="red")
+    creature_plot.line(x_iter, y_wolves, legend_label="Wolves", line_color="red", line_width=2)
 
-    creature_plot.legend.background_fill_color = "#e6e6e6"; creature_plot.legend.background_fill_alpha = 0.25
-    creature_plot.legend.label_text_font_style = "bold"
+    creature_plot.legend_label.background_fill_color = "#e6e6e6"; creature_plot.legend_label.background_fill_alpha = 0.25
+    creature_plot.legend_label.label_text_font_style = "bold"
 
     html_text = file_html(creature_plot, CDN, "Population Evolution")
     element_id = html_text[
@@ -133,11 +133,11 @@ def index():
     creature_plot2.xaxis.axis_line_color = creature_plot2.yaxis.axis_line_color = "white"
 
     for a, area in enumerate(areas):
-      creature_plot2.patch(iter2, areas[area], color=colors[a], legend=area, alpha=1, line_color=None)
+      creature_plot2.patch(iter2, areas[area], color=colors[a], legend_label=area, alpha=1, line_color=None)
 
-    creature_plot2.legend.background_fill_color = "#e6e6e6"
-    creature_plot2.legend.background_fill_alpha = 0.4
-    creature_plot2.legend.label_text_font_style = "bold"
+    creature_plot2.legend_label.background_fill_color = "#e6e6e6"
+    creature_plot2.legend_label.background_fill_alpha = 0.4
+    creature_plot2.legend_label.label_text_font_style = "bold"
 
     creature_plot2.yaxis[0].formatter = NumeralTickFormatter(format="0%")
 
