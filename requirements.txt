@@ -2,6 +2,6 @@ gunicorn==19.6.0
 flask==0.11.1
 psycopg2==2.7.5
 numpy==1.26.2
-pandas==0.18.1
+pandas==1.5.3
 bokeh==0.12.1
 jinja2==2.8
