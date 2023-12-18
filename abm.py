@@ -144,7 +144,7 @@ def index():
     element_id2 = html_text2[re.search("docid", html_text2).start() + 12: re.search("docid", html_text2).start() + 48]
     js_script2 = html_text2[re.search(r"function()", html_text2).start() - 8 : re.search("Bokeh.embed.embed_items",
                                                                                          html_text2).start() + 61]
-
+    print(element_id2)
     plots_created = True
     return render_template('index.html', element_id=element_id, js_script=js_script, plots_created=plots_created,
                            element_id2=element_id2, js_script2=js_script2, terrain_size=terrain_size, grass=grass,
