@@ -132,11 +132,11 @@ def index():
     creature_plot2.xaxis.axis_line_color = creature_plot2.yaxis.axis_line_color = "white"
 
     for a, area in enumerate(areas):
-      creature_plot2.patch(iter2, areas[area], color=colors[a], legend_label=area, alpha=1, line_color=None)
+      creature_plot2.patch(iter2, areas[area], color=colors[a], alpha=1, line_color=None)
 
-    creature_plot2.legend_label.background_fill_color = "#e6e6e6"
-    creature_plot2.legend_label.background_fill_alpha = 0.4
-    creature_plot2.legend_label.label_text_font_style = "bold"
+    # creature_plot2.legend_label.background_fill_color = "#e6e6e6"
+    # creature_plot2.legend_label.background_fill_alpha = 0.4
+    # creature_plot2.legend_label.label_text_font_style = "bold"
 
     creature_plot2.yaxis[0].formatter = NumeralTickFormatter(format="0%")
 
