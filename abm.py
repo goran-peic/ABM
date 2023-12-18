@@ -71,7 +71,7 @@ def index():
       creature_plot.yaxis.major_label_text_color = "white"
     creature_plot.xaxis.axis_line_color = creature_plot.yaxis.axis_line_color = "white"
 
-    creature_plot.circle(x_iter, y_grass, legend="Grass", fill_color="green")
+    # creature_plot.circle(x_iter, y_grass, legend="Grass", fill_color="green")
     creature_plot.line(x_iter, y_grass, legend="Grass", line_color="green", line_width=2)
 
     creature_plot.square(x_iter, y_sheep, legend="Sheep", fill_color="#ffffff")
