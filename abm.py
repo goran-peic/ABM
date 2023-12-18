@@ -84,7 +84,7 @@ def index():
     # creature_plot.legend.label_text_font_style = "bold"
 
     html_text = file_html(creature_plot, CDN, "Population Evolution")
-    element_id = html_text[re.search("docid", html_text).start() + 12: re.search("docid", html_text).start() + 48]
+    element_id = html_text[re.search("docid", html_text).start() + 8: re.search("docid", html_text).start() + 44]
     js_script = html_text[re.search(r"function()", html_text).start() - 8 : re.search("Bokeh.embed.embed_items",
                                                                                       html_text).start() + 61]
 
@@ -141,11 +141,11 @@ def index():
     creature_plot2.yaxis[0].formatter = NumeralTickFormatter(format="0%")
 
     html_text2 = file_html(creature_plot2, CDN, "Population Evolution")
-    element_id2 = html_text2[re.search("docid", html_text2).start() + 12: re.search("docid", html_text2).start() + 48]
+    element_id2 = html_text2[re.search("docid", html_text2).start() + 8: re.search("docid", html_text2).start() + 44]
     js_script2 = html_text2[re.search(r"function()", html_text2).start() - 8 : re.search("Bokeh.embed.embed_items",
                                                                                          html_text2).start() + 61]
-    print(html_text2)
-    print(element_id2)
+    # print(html_text2)
+    # print(element_id2)
     plots_created = True
     return render_template('index.html', element_id=element_id, js_script=js_script, plots_created=plots_created,
                            element_id2=element_id2, js_script2=js_script2, terrain_size=terrain_size, grass=grass,
