@@ -84,10 +84,10 @@ def index():
     # creature_plot.legend.label_text_font_style = "bold"
 
     html_text = file_html(creature_plot, CDN, "Population Evolution")
-    script_1, div = components(creature_plot)
+    script_1, div1 = components(creature_plot)
     doc_id = html_text[re.search("docid", html_text).start() + 8: re.search("docid", html_text).start() + 44]
     # element_id = script_1[re.search("elementid", script_1).start() + 12: re.search("elementid", script_1).start() + 48]
-    element_id = div[re.search("div id", div).start() + 8: re.search("div id", div).start() + 44]
+    element_id = div1[re.search("div id", div1).start() + 8: re.search("div id", div1).start() + 44]
     #print(script_1)
     print(div)
     print(element_id)
@@ -147,7 +147,10 @@ def index():
     creature_plot2.yaxis[0].formatter = NumeralTickFormatter(format="0%")
 
     html_text2 = file_html(creature_plot2, CDN, "Population Evolution")
-    element_id2 = html_text2[re.search("docid", html_text2).start() + 8: re.search("docid", html_text2).start() + 44]
+    script_2, div2 = components(creature_plot2)
+    doc_id = html_text2[re.search("docid", html_text2).start() + 8: re.search("docid", html_text2).start() + 44]
+    # element_id = script_1[re.search("elementid", script_1).start() + 12: re.search("elementid", script_1).start() + 48]
+    element_id2 = div2[re.search("div id", div2).start() + 8: re.search("div id", div2).start() + 44]
     js_script2 = html_text2[re.search(r"function()", html_text2).start() - 8 : re.search("Bokeh.embed.embed_items",
                                                                                          html_text2).start() + 61]
     # print(html_text2)
