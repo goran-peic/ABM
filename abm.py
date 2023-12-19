@@ -89,7 +89,7 @@ def index():
     # element_id = script_1[re.search("elementid", script_1).start() + 12: re.search("elementid", script_1).start() + 48]
     element_id = div1[re.search("div id", div1).start() + 8: re.search("div id", div1).start() + 44]
     #print(script_1)
-    print(div)
+    print(div1)
     print(element_id)
     js_script = html_text[re.search(r"function()", html_text).start() - 8 : re.search("Bokeh.embed.embed_items",
                                                                                       html_text).start() + 61]
@@ -160,7 +160,7 @@ def index():
                            element_id2=element_id2, js_script2=js_script2, terrain_size=terrain_size, grass=grass,
                            sheep=sheep, wolves=wolves, simulation_runs=simulation_runs, grass_reproduction_rate=grass_reproduction_rate,
                            sheep_reproduction_rate=sheep_reproduction_rate, wolf_reproduction_rate=wolf_reproduction_rate,
-                           grass_life=grass_life, sheep_life=sheep_life, wolf_life=wolf_life)
+                           grass_life=grass_life, sheep_life=sheep_life, wolf_life=wolf_life, div1=div1, div2=div2)
 
 if __name__ == "__main__":
   app.run(debug=False)
