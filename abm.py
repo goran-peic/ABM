@@ -2,7 +2,7 @@ from flask import Flask, render_template, request
 import pandas as pd
 import numpy as np
 from functions import seedActors, RunSimulation, extractInfo, stacked
-from bokeh.plotting import figure
+from bokeh.plotting import figure, output_file, save, show
 from bokeh.models import NumeralTickFormatter
 from bokeh.embed import file_html, components
 from bokeh.resources import CDN
@@ -85,12 +85,10 @@ def index():
 
     html_text = file_html(creature_plot, CDN, "Population Evolution")
     script_1, div1 = components(creature_plot)
-    doc_id = html_text[re.search("docid", html_text).start() + 8: re.search("docid", html_text).start() + 44]
+    #show(creature_plot)
+    # doc_id = html_text[re.search("docid", html_text).start() + 8: re.search("docid", html_text).start() + 44]
     # element_id = script_1[re.search("elementid", script_1).start() + 12: re.search("elementid", script_1).start() + 48]
     element_id = div1[re.search("div id", div1).start() + 8: re.search("div id", div1).start() + 44]
-    #print(script_1)
-    print(div1)
-    print(element_id)
     js_script = html_text[re.search(r"function()", html_text).start() - 8 : re.search("Bokeh.embed.embed_items",
                                                                                       html_text).start() + 61]
 
@@ -160,7 +158,7 @@ def index():
                            element_id2=element_id2, js_script2=js_script2, terrain_size=terrain_size, grass=grass,
                            sheep=sheep, wolves=wolves, simulation_runs=simulation_runs, grass_reproduction_rate=grass_reproduction_rate,
                            sheep_reproduction_rate=sheep_reproduction_rate, wolf_reproduction_rate=wolf_reproduction_rate,
-                           grass_life=grass_life, sheep_life=sheep_life, wolf_life=wolf_life, div1=div1, div2=div2)
+                           grass_life=grass_life, sheep_life=sheep_life, wolf_life=wolf_life, div1=div1, div2=div2, script_1=script_1, script_2=script_2, creature_plot=creature_plot)
 
 if __name__ == "__main__":
   app.run(debug=False)
