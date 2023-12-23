@@ -21,16 +21,25 @@
 
     <!-- Theme CSS -->
     <link href="/static/css/grayscale.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="/static/css/bokeh-0.12.1.min.css" type="text/css" />
-    <script type="text/javascript" src="/static/js/bokeh-0.12.1.min.js"></script>
-    <script type="text/javascript">Bokeh.set_log_level("info");</script>
+    <script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-3.3.2.min.js"></script>
+    <script type="text/javascript">
+        Bokeh.set_log_level("info");
+    </script>
+<script src="https://cdn.bokeh.org/bokeh/release/bokeh-2.4.0.min.js"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.bokeh.org/bokeh/release/bokeh-widgets-2.4.0.min.js"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.bokeh.org/bokeh/release/bokeh-tables-2.4.0.min.js"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.bokeh.org/bokeh/release/bokeh-gl-2.4.0.min.js"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.bokeh.org/bokeh/release/bokeh-mathjax-2.4.0.min.js"
+        crossorigin="anonymous"></script>
 
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-
-    <![endif]-->
+    <!-- Custom Fonts -->
+    <link href="/static/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
 
 </head>
 
@@ -217,7 +226,7 @@
              <div class="form-group row">
                <label for="runs" class="col-sm-2 col-form-label">Number of Iterations</label>
                <div class="col-sm-1">
-               <input type="number" class="form-control" name="simulation_runs" id="runs" value={% if plots_created %} {{ simulation_runs }} {% else %} "{{ 100 }}" {% endif %}>
+               <input type="number" class="form-control" name="simulation_runs" id="runs" value={% if plots_created %} {{ simulation_runs }} {% else %} "{{ 33 }}" {% endif %}>
              </div>
              </div>
 <!--        </form> -->
@@ -315,19 +324,21 @@
 <div class="row"><div class="col-md-12"><h4 style="font-size: 25px">Results</h4></div></div>
 
 <div class="col-md-12">
-    <div class="bk-root">
-        <div class="plotdiv" id="{{ element_id }}"></div>
+    <div class="bk-root" style="display: flex; flex-direction: row; align-items: center; justify-content: center;">
+                {{ div1 | safe }}
+                {{ script_1 | safe }}
     </div>
 </div>
 
-<script type="text/javascript"> {{ js_script|safe }} </script>
+
 <div class="col-md-12">
-    <div class="bk-root" style="padding-top:50px">
-        <div class="plotdiv" id="{{ element_id2 }}"></div>
+    <div class="bk-root" style="display: flex; flex-direction: row; align-items: center; justify-content: center;">
+                {{ div2 | safe }}
+                {{ script_2 | safe }}
     </div>
 </div>
 
-<script type="text/javascript"> {{ js_script2|safe }} </script>
+
 {% endif %}
 
     </section>
@@ -353,9 +364,7 @@
     <!-- Theme JavaScript -->
     <script src="/static/js/grayscale.min.js"></script>
 
-{% if plots_created %}
-<script> $(function(){ window.location.hash = "setup"; }); </script>
-{% endif %}
+
 
 </body>
 
