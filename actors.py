@@ -1,6 +1,4 @@
 import numpy as np
-
-
 class Actor():
 
   def __init__(self, life, reproduction_rate, position):
@@ -97,5 +95,5 @@ class Wolf(Actor):
     else:
       self.consecutive_starve += 1
       self.life -= self.consecutive_starve
-      print('wolf just starved')
+      # print('wolf just starved')
     return available_sheep
